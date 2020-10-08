@@ -1,0 +1,33 @@
+{% extends "myCarApp/base.html" %}
+{% load staticfiles %}
+
+{% block body_block %}
+<div class="container">
+  <div>
+    {% if registered %}
+    <div>
+      <div id="main" class="wrapper style1">
+        <div class="container">
+          <header class="major">
+            <h2>Thank you for registering!</h2>
+          </header>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class='form_container'>
+      <h1 class='form_header'>Register Here if you want to be a lessee</h1>
+      <form enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ lessee_form.as_p }}
+        <input type="submit" name="" value="Register">
+      </form>
+    </div>
+    {% endif %}
+
+  </div>
+
+</div>
+
+{% endblock %}

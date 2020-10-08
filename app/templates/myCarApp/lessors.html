@@ -1,0 +1,65 @@
+{% extends "myCarApp/base.html" %}
+{% load staticfiles %}
+
+{% block body_block %}
+
+<!-- Main -->
+<div id="main" class="wrapper style1">
+  <div class="container">
+    <header class="major">
+      <h2>Lessors</h2>
+      <p>Here you can find every information you will need.</p>
+    </header>
+    <div class="row 150%">
+      <div class="8u 12u$(medium)">
+
+        <!-- Content -->
+        <section id="content">
+          <a href="#" class="image fit"><img src="{% static "images/pic06.jpg" %}" alt="" /></a>
+          <h3>First time using myCar?</h3>
+          <p>First thing you have to do is sign-up and then you will be on your way to give your car for rent.</p>
+
+          <h3>What do we expect from you?</h3>
+          <ul>
+            <li>To submit your information.</li>
+            <li>To submit only the real characteristics of your car.</li>
+            <li>To send us a recent photo of your car.</li>
+          </ul>
+          <footer>
+            <ul class="actions">
+              <li><a href="{% url 'lessor_register' %}" class="button">Sign Up</a></li>
+            </ul>
+          </footer>
+        </section>
+
+      </div>
+      <div class="4u$ 12u$(medium)">
+
+        <!-- Sidebar -->
+        <section id="sidebar">
+          <section>
+            <h3>Already using myCar?</h3>
+            <p>The only thing you have to do now is Sign-In and manage yours or your car's info.</p>
+            <footer>
+              <ul class="actions">
+                <li><a href="{% url 'login' %}" class="button">Sign In</a></li>
+              </ul>
+            </footer>
+          </section>
+          <hr />
+          <section>
+            <a href="#" class="image fit"><img src="{% static "images/pic07.jpg" %}" alt="" /></a>
+            <h3>Want to be a lessee too?</h3>
+            <p>It can be done. The only thing you have to do is sign up as a lessee but you should use a different e-mail.</p>
+            <footer>
+              <a href="{% url 'lessees' %}" class="button">Lessees</a>
+              <a href="{% url 'lessee_register' %}" class="button">Sign Up</a>
+            </footer>
+          </section>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

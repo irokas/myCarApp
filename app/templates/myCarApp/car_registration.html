@@ -1,0 +1,42 @@
+{% extends "myCarApp/base.html" %}
+{% load staticfiles %}
+
+{% block body_block %}
+<script>
+  $(function() {
+    $( ".datepicker" ).datepicker({
+      changeDay: true,
+      changeMonth: true,
+      changeYear: true,
+      yearRange: "2020:2025",
+      // You can put more options here.
+
+    });
+  });
+</script>
+<div class="container">
+  <div>
+    {% if car_is_registered %}
+    <div>
+      <div id="main" class="wrapper style1">
+        <div class="container">
+          <header class="major">
+            <h2>Thank you for registering your car!</h2>
+          </header>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class='form_container'>
+      <h1 class='form_header'>Register Your Car</h1>
+      <form enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        {{ car_registration_form.as_p }}
+        <input type="submit" name="" value="Register Car">
+      </form>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

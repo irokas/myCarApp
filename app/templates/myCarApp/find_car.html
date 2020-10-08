@@ -1,0 +1,116 @@
+{% extends "myCarApp/base.html" %}
+{% load staticfiles %}
+
+{% block body_block %}
+<!-- Main -->
+<div id="main" class="wrapper style1">
+  <div class="container">
+    <header class="major">
+      <h2>Find Car</h2>
+    </header>
+  </div>
+
+  <div id="filter_bar" >
+    <nav id="nav">
+      <form action="{% url 'find_car' %}" method="post">
+        {% csrf_token %}
+        <ul>
+          <li>
+            <select name="CC">
+              <option value="CC">CC</option>
+              <option value="500-1000">500 - 1000</option>
+              <option value="1000-1500">1000 - 1500</option>
+              <option value="1500-2000">1500 - 2000</option>
+              <option value="2000+">2000+</option>
+            </select>
+          </li>
+          <li>
+            <select name="Year">
+              <option value="Year">Year</option>
+              <option value="1990-1999">1990 - 1999</option>
+              <option value="2000-2005">2000 - 2005</option>
+              <option value="2006-2010">2006 - 2010</option>
+              <option value="2011-2015">2011 - 2015</option>
+              <option value="2016+">2016+</option>
+            </select>
+          </li>
+          <li>
+            <select name="fuelType">
+              <option value="fuelType">Fuel Type</option>
+              <option value="Gasoline">Gasoline</option>
+              <option value="Diesel">Diesel</option>
+              <option value="Gas">Gas</option>
+              <option value="Electric">Electric</option>
+            </select>
+          </li>
+          <li>
+            <select name="pricePerDay">
+              <option value="pricePerDay">Price Per Day</option>
+              <option value="10-15">10 - 15</option>
+              <option value="15-20">15 - 20</option>
+              <option value="20-25">20 - 25</option>
+              <option value="25+">25+</option>
+            </select>
+          </li>
+          <li>
+            <select name="Transmission">
+              <option value="Transmission">Transmission</option>
+              <option value="Auto">Auto</option>
+              <option value="Manual">Manual</option>
+            </select>
+          </li>
+          <li><input type="date" class="button notsospecial" name="firstDay" value="{{ firstDay }}" required/></li>
+          <li><input type="date" class="button notsospecial" name="lastDay" value="{{ lastDay }}" required/></li>
+          <li><input type="submit" class="button special" name="" value="Submit Filters"/></li>
+        </ul>
+      </form>
+    </nav>
+  	<p>{{ Message }}</p>
+
+    <div style="overflow: hidden;">
+
+      {% for result in searchResult %}
+      <div class="imagewraptwo" id="results">
+        <div class="image_container">
+          <img src="{{result.photo.url}}">
+        </div>
+        <hr id="carhr">
+        <ul>
+          <li class="carname">{{result.brand}} {{result.model}}</li>
+
+          <li>CC: {{ result.CC }} </li>
+          <li>Year: {{ result.year }}</li>
+          <li>Fuel Type: {{ result.fuelType }}</li>
+          <li>Transmission: {{ result.transmission }}</li>
+          <li>Price Per Day:{{ result.pricePerDay }}€</li>
+          <form action="{% url 'successful_rent' %}" method="post">
+            {% csrf_token %}
+            <ul>
+              <li class="hidden_li">
+                <select name="CC">
+                  <option value="{{ result.CC }}"></option>
+                </select>
+              </li>
+              <li class="hidden_li">
+                <select name="carId">
+                  <option value="{{ result.id }}"></option>
+                </select>
+              </li>
+							<li class="hidden_li">
+                <select name="firstDay">
+                  <option value="{{ firstDay }}"></option>
+                </select>
+              </li>
+              <li><input type="submit" class="button special" name="" value="Rent Now"/></li>
+
+            </ul>
+          </form>
+          <!--<a href="{% url 'successful_rent' %}" class="button special" style="margin-left:25px; margin-top:10px;">Rent Now</a>-->
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</div>
+{% endblock %}

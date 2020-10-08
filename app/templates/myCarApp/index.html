@@ -1,0 +1,156 @@
+{% extends "myCarApp/base.html" %}
+{% load staticfiles %}
+
+{% block body_block %}
+<!-- Banner -->
+<section id="banner">
+  <div class="content">
+    <header>
+      <h2>The future has landed</h2>
+      <p>And there are no hoverboards or flying cars.<br />
+        Just cars. Our cars and your cars.</p>
+    </header>
+    <span class="image"><img src="{% static "images/logo.png" %}" alt="MyCar Logo" /></span>
+    {% if user.is_authenticated %}
+    {%ifequal type "lessee"%}
+    <br>
+    <form action="{% url 'find_car' %}" method="post">
+      {% csrf_token %}
+      <input id="firstDay" type="date" name="firstDay" class="button notsospecial" value = "{{today|date:"Y-m-d" }}" required/>
+      <input id="lastDay" type="date" name="lastDay" class="button notsospecial" value ="{{tomorrow|date:"Y-m-d"}}" required/>
+      <input type="submit" class="button notsospecial" name="" value="Find Car"/>
+    </form>
+    {%endifequal%}
+    {%ifequal type "lessor"%}
+    <a href="{% url 'car_register' %}" class="button notsospecial">Register Car</a>
+    {%endifequal%}
+    {% endif %}
+
+  </div>
+  {% if not user.is_authenticated%}
+  <a href="#one" class="goto-next scrolly">Next</a>
+  {% endif %}
+</section>
+<!-- One -->
+{% if not user.is_authenticated %}
+<section id="one" class="spotlight style1 bottom">
+  <span class="image fit main"><img src="{% static "images/pic02.jpg" %}" alt="" /></span>
+  <div class="content">
+    <div class="container">
+      <div class="row">
+        <div class="4u 12u$(medium)">
+          <header>
+            <h2>myCar</h2>
+            <p>The app for all of your trips</p>
+          </header>
+        </div>
+        <div class="4u 12u$(medium)">
+          <p>myCar is made by an ambitious student with one simple goal. To make your life easier.</p>
+        </div>
+        <div class="4u$ 12u$(medium)">
+          <p>You're asking how? Just keep scrolling to find out.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="#two" class="goto-next scrolly">Next</a>
+</section>
+
+<!-- Two -->
+<section id="two" class="spotlight style2 right">
+  <span class="image fit main"><img src="{% static "images/pic03.jpg" %}" alt="" /></span>
+  <div class="content">
+    <header>
+      <h2>What is myCar?</h2>
+      <p>Are you a lessee?</p>
+    </header>
+    <p>Mycar is an app that will allow you to rent a car that belongs to someone who doesn't plan on using it for a while. So they give it for rent, to people like you, while we make sure that everything about the car and about the driver is perfect. </p>
+    <ul class="actions">
+      <li><a href="{% url 'lessees' %}" class="button">Learn More</a></li>
+    </ul>
+  </div>
+  <a href="#three" class="goto-next scrolly">Next</a>
+</section>
+
+<!-- Three -->
+<section id="three" class="spotlight style3 left">
+  <span class="image fit main bottom"><img src="{% static "images/pic04.jpg" %}" alt="" /></span>
+  <div class="content">
+    <header>
+      <h2>Are you interested in giving your car for rent?</h2>
+      <p>We are your people then.</p>
+    </header>
+    <p>We are counting on you. The power is in your hands.
+      You can assign the price you want and the only thing we do is simple. Just check your car's condition and its legal documents before you can give it for rent.</p>
+    <ul class="actions">
+      <li><a href="{% url 'lessors' %}" class="button">Learn More</a></li>
+    </ul>
+  </div>
+  <a href="#four" class="goto-next scrolly">Next</a>
+</section>
+
+<!-- Four -->
+<section id="four" class="wrapper style1 special fade-up">
+  <div class="container">
+    <header class="major">
+      <h2>You have more questions?</h2>
+      <p>Maybe our Frequently Asked Questions can help you find your answer.</p>
+    </header>
+    <div class="box alt">
+      <div class="row uniform">
+        <section class="4u 6u(medium) 12u$(xsmall)">
+          <span class="icon alt major fa-user-secret"></span>
+          <h3>Privacy</h3>
+          <p>You must not worry about any of your information being given to anyone.
+            That is only going to happen if you choose your lessor and you have to
+            make your transaction.</p>
+        </section>
+        <section class="4u 6u$(medium) 12u$(xsmall)">
+          <span class="icon alt major fa-car"></span>
+          <h3>Are you a lessee?</h3>
+          <p>Our policy ensures you that if something goes wrong with the lessor
+            you are not going to get charged for anything you didn't chose to.</p>
+        </section>
+        <section class="4u$ 6u(medium) 12u$(xsmall)">
+          <span class="icon alt major fa-user"></span>
+          <h3>Are you a lessor?</h3>
+          <p>We can assure you that you will always get your money no matter what.</p>
+        </section>
+        <section class="4u 6u$(medium) 12u$(xsmall)">
+          <span class="icon alt major fa-credit-card"></span>
+          <h3>Payment Methods</h3>
+          <p>We support payments via <span class="icon alt minor fa-credit-card"></span> Credit Cards  ,  <span class="icon alt minor fa-paypal"></span> PayPal , and <span class="icon alt minor fa-google-wallet"></span> Google Wallet
+          </p>
+        </section>
+        <section class="4u 6u(medium) 12u$(xsmall)">
+          <span class="icon alt major fa-motorcycle"></span>
+          <h3>Want to rent a motorcycle?</h3>
+          <p>Well, that is something that I am already working on and soon enough you will be 									able to do.</p>
+        </section>
+        <section class="4u$ 6u$(medium) 12u$(xsmall)">
+          <span class="icon alt major fa-envelope"></span>
+          <h3>Who am I?</h3>
+          <p>My name is Iro Kasidiari and by day I study electrical and computer engineering in university of Thessaly.</p>
+        </section>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Five -->
+<section id="five" class="wrapper style2 special fade">
+  <div class="container">
+    <header>
+      <h2>Want to keep up with out amazing offers?</h2>
+      <p>Just subscribe by giving us your email adress.</p>
+    </header>
+    <form method="get" action="#" class="container 50%">
+      <div class="row uniform 50%">
+        <div class="8u 12u$(xsmall)"><input type="email" name="email" id="email" placeholder="Your Email Address" /></div>
+        <div class="4u$ 12u$(xsmall)"><input type="submit" value="Get Started" class="fit special" /></div>
+      </div>
+    </form>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

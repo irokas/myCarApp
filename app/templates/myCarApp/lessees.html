@@ -1,0 +1,46 @@
+{% extends "myCarApp/base.html" %}
+{% load staticfiles %}
+
+{% block body_block %}
+
+<!-- Main -->
+<div id="main" class="wrapper style1">
+  <div class="container">
+    <header class="major">
+      <h2>Lessees</h2>
+      <p>You are just a few clicks away from renting your ideal car</p>
+    </header>
+    <div class="row 150%">
+      <div class="4u 12u$(medium)">
+
+        <!-- Sidebar -->
+        <section id="sidebar">
+          <section>
+            <h3>First time using myCar?</h3>
+            <p>We will try to create an unforgettable experience for you.</p>
+          </section>
+        </section>
+
+      </div>
+      <div class="8u$ 12u$(medium) important(medium)">
+
+        <!-- Content -->
+        <section id="content">
+          <a href="#" class="image fit"><img src="{% static "images/pic05.jpg" %}" alt="" /></a>
+          <h3>Already using myCar?</h3>
+          <p>Thank you for coming back</p>
+          <p>We are always trying to improve your experience. So if you have anything you can suggest to us we will be more than happy to have it under consideration. In that case send us a message. And of course don't forget to recommend us to your friends.</p>
+          <h3>What do we need from you?</h3>
+          <p>Just the essentials</p>
+          <ul>
+            <li>Your official name. Which means we will need the name you have written on official documents(e.g. I.D.s, car licence etc.)</li>
+            <li>A credit/debit card or a payPal account or even a google wallet account, so that you can pay after you return your car.</li>
+            <li>And of course you have to be careful with the car you will be given</li>
+          </ul>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
